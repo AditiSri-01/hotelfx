@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox stylesheets="@../../../../style.css" styleClass="root-pane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hotel.controller.MainController">
+    <VBox alignment="CENTER" spacing="5" styleClass="header-box">
+        <padding><Insets top="20" bottom="20"/></padding>
+        <Label text="🏨 Hotel Management System" styleClass="main-title"/>
+        <Label text="Manage rooms, bookings, and billing" styleClass="sub-title"/>
+    </VBox>
+    <TabPane VBox.vgrow="ALWAYS" tabClosingPolicy="UNAVAILABLE" styleClass="main-tabs">
+        <Tab text="🛏 Rooms">
+            <HBox spacing="30" styleClass="tab-content">
+                <padding><Insets top="30" right="40" bottom="30" left="40"/></padding>
+                <VBox spacing="20" styleClass="card" prefWidth="350">
+                    <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+                    <Label text="Add New Room" styleClass="card-title"/>
+                    <VBox spacing="5">
+                        <Label text="Room No." styleClass="field-label"/>
+                        <TextField fx:id="roomNoField" promptText="e.g. 401" styleClass="input-field"/>
+                    </VBox>
+                    <VBox spacing="5">
+                        <Label text="Room Type" styleClass="field-label"/>
+                        <ComboBox fx:id="roomTypeBox" promptText="Standard" maxWidth="Infinity" styleClass="input-field"/>
+                    </VBox>
+                    <VBox spacing="5">
+                        <Label text="Price / Night (₹)" styleClass="field-label"/>
+                        <TextField fx:id="priceField" promptText="e.g. 150" styleClass="input-field"/>
+                    </VBox>
+                    <Region VBox.vgrow="ALWAYS" />
+                    <Button text="+ Add Room" onAction="#addRoom" maxWidth="Infinity" styleClass="primary-btn"/>
+                </VBox>
+                <VBox spacing="15" styleClass="card" HBox.hgrow="ALWAYS">
+                    <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+                    <Label text="All Rooms (Sorted by Price)" styleClass="card-title"/>
+                    <TableView fx:id="roomTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colRoomNo" text="Room" prefWidth="120"/>
+                            <TableColumn fx:id="colRoomType" text="Type" prefWidth="180"/>
+                            <TableColumn fx:id="colRoomPrice" text="Price" prefWidth="120"/>
+                            <TableColumn fx:id="colRoomStatus" text="Status" prefWidth="150"/>
+                        </columns>
+                        <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
+                    </TableView>
+                </VBox>
+            </HBox>
+        </Tab>
+        <Tab text="📖 Booking">
+            <HBox spacing="30" styleClass="tab-content">
+                <padding><Insets top="30" right="40" bottom="30" left="40"/></padding>
+                <VBox spacing="20" styleClass="card" prefWidth="350">
+                    <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+                    <Label text="New Booking" styleClass="card-title"/>
+                    <VBox spacing="5">
+                        <Label text="Customer Name" styleClass="field-label"/>
+                        <TextField fx:id="nameField" promptText="e.g. John Doe" styleClass="input-field"/>
+                    </VBox>
+                    <VBox spacing="5">
+                        <Label text="Phone" styleClass="field-label"/>
+                        <TextField fx:id="phoneField" promptText="e.g. 9876543210" styleClass="input-field"/>
+                    </VBox>
+                    <VBox spacing="5">
+                        <Label text="Select Room" styleClass="field-label"/>
+                        <ComboBox fx:id="bookRoomSelectBox" promptText="Choose Available Room..." maxWidth="Infinity" styleClass="input-field"/>
+                    </VBox>
+                    <VBox spacing="5">
+                        <Label text="Number of Nights" styleClass="field-label"/>
+                        <Spinner fx:id="nightsSpinner" maxWidth="Infinity" styleClass="input-field"/>
+                    </VBox>
+                    <Region VBox.vgrow="ALWAYS" />
+                    <Button text="Book Room" onAction="#bookRoom" maxWidth="Infinity" styleClass="primary-btn"/>
+                </VBox>
+                <VBox spacing="15" styleClass="card" HBox.hgrow="ALWAYS">
+                    <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+                    <Label text="Active Bookings" styleClass="card-title"/>
+                    <TableView fx:id="activeBookingsTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colBookCustomer" text="Customer"/>
+                            <TableColumn fx:id="colBookRoom" text="Room"/>
+                            <TableColumn fx:id="colBookNights" text="Nights"/>
+                            <TableColumn fx:id="colBookTotal" text="Total (₹)"/>
+                        </columns>
+                        <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
+                    </TableView>
+                </VBox>
+            </HBox>
+        </Tab>
+        <Tab text="💲 Checkout &amp; Billing">
+            <VBox spacing="30" styleClass="tab-content">
+                <padding><Insets top="30" right="40" bottom="30" left="40"/></padding>
+                <VBox spacing="15" styleClass="card" VBox.vgrow="ALWAYS">
+                    <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+                    <Label text="Active Bookings — Checkout" styleClass="card-title"/>
+                    <TableView fx:id="checkoutTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colCheckCustomer" text="Customer"/>
+                            <TableColumn fx:id="colCheckRoom" text="Room"/>
+                            <TableColumn fx:id="colCheckNights" text="Nights"/>
+                            <TableColumn fx:id="colCheckTotal" text="Total (₹)"/>
+                            <TableColumn fx:id="colCheckAction" text="Action" prefWidth="120" style="-fx-alignment: CENTER;"/>
+                        </columns>
+                        <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
+                    </TableView>
+                </VBox>
+                <VBox spacing="15" styleClass="card" VBox.vgrow="ALWAYS">
+                    <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+                    <Label text="Checkout History" styleClass="card-title"/>
+                    <TableView fx:id="historyTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colHistCustomer" text="Customer"/>
+                            <TableColumn fx:id="colHistRoom" text="Room"/>
+                            <TableColumn fx:id="colHistTotal" text="Amount Paid (₹)"/>
+                        </columns>
+                        <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
+                    </TableView>
+                </VBox>
+            </VBox>
+        </Tab>
+    </TabPane>
+</VBox>
